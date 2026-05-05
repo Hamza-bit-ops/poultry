@@ -1,0 +1,68 @@
+{
+  "name": "poultry",
+  "version": "1.0.0",
+  "description": "Full-stack application for poultry operations and voucher-based accounting: **React + Tailwind** frontend, **Node.js + Express + MongoDB** backend, **JWT** authentication.",
+  "main": "electron/main.js",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "dev:frontend": "npm --prefix frontend run dev -- --host 127.0.0.1 --port 5173",
+    "dev:electron": "wait-on tcp:5173 && cross-env ELECTRON_START_URL=http://127.0.0.1:5173 electron .",
+    "dev": "concurrently -k \"npm run dev:frontend\" \"npm run dev:electron\"",
+    "build:frontend": "npm --prefix frontend run build",
+    "build": "npm run build:frontend && electron-builder",
+    "start": "electron .",
+    "dist": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hamza-bit-ops/poultry.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hamza-bit-ops/poultry/issues"
+  },
+  "homepage": "https://github.com/Hamza-bit-ops/poultry#readme",
+  "build": {
+    "appId": "com.poultry.desktop",
+    "productName": "Poultry Desktop",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/dist/**/*",
+      "backend/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "backend/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "electron/assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^41.5.0",
+    "electron-builder": "^26.8.1",
+    "wait-on": "^9.0.5"
+  },
+  "dependencies": {
+    "electron-is-dev": "^3.0.1"
+  }
+}

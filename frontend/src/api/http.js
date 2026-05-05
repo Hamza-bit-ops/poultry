@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 /** Base URL for REST API — Vite env or same-origin proxy */
-const baseURL = import.meta.env.VITE_API_URL || '/api';
+const desktopApiUrl = typeof window !== 'undefined' ? window.electronAPI?.apiBaseUrl : '';
+const baseURL = import.meta.env.VITE_API_URL || desktopApiUrl || '/api';
 
 export const http = axios.create({
   baseURL,
