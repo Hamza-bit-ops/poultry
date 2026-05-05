@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Business app: crisp tables and form focus rings */
+body {
+  font-feature-settings: 'tnum' 1;
+}
